@@ -1,0 +1,269 @@
+
+<template name="homepage">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="page-header">
+					<h1>Swim Workouts<small>.enter here</small></h1> 					
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12">
+				{{#if notification}}
+					<div class="alert alert-{{notification.color}} pull-right" role="alert">{{notification.message}} 
+					<button class="btn btn-xs pull-right" id="close-alert">x</button></div>
+				{{/if}}
+			</div>
+		</div>	
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="row">
+						<div class="col-sm-12"> 							
+							<h3>New Set</h3>
+							<div class="form-group">								
+								<h3><label class="label label-success" for="select-type">Set Type</label></h3>
+								<select class="form-control" id="select-type">
+									<option disabled selected value> -- select an option -- </option>
+									<option>Warm Up</option>
+									<option>Pre-set</option>
+									<option>Main Set</option>
+									<option>Focus Set</option>
+									<option>Warm Down</option>				   
+								</select>
+							</div>
+							<div class="form-group">
+								<h3><label class="label label-danger" for="cycles-input">Cycles</label></h3>
+								<!-- <input type="text" class="form-control" id="cycles-input" placeholder="Number of cycles"> -->
+								<select class="form-control" id="cycles-input">
+									<option disabled selected value> -- select an option -- </option>
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+									<option>4</option>
+									<option>5</option>
+									<option>6</option>
+									<option>7</option>
+									<option>8</option>
+									<option>9</option>											  
+								</select>
+							</div>
+							<div class="form-group">
+								<h3><label class="label label-warning" for="cycle-details">Cycle Details</label></h3>
+								{{#each numberOfCycles}}
+									<!-- <input class="form-control cycle-details cycle-details-{{this}}" placeholder="cycle {{this}}"> -->
+									<select class="form-control cycle-details" id="cycle-{{this}}">										
+										<option disabled selected value> -- select an option for cycle {{this}}-- </option>
+										<option >None</option>
+										<option >Free</option>
+										<option >IM</option>
+										<option >Choice</option>
+										<option >Stroke</option>
+										<option >Fly</option>
+										<option >Back</option>
+										<option >Breast</option>
+										<option >Swim</option>
+										<option >Pull</option>
+										<option >Kick</option>
+										<option >Drill</option>
+									</select>
+								{{/each}}
+							</div>
+							<div class="form-group">
+								<h3><span class="label label-primary">Special Instructions</span></h3>
+								<textarea class="form-control" id="special-instructions" placeholder="Instructions(Optional)" rows="3"></textarea>				  
+							</div>
+						</div>
+					</div>					
+					<div class="row">					
+						<div class="col-sm-12">
+							<h3><label class="label label-info">New Item</label></h3>
+
+							<div class="form-group">
+								<label for="item-reps">Reps</label>
+								<input type="text" class="form-control" id="item-reps" placeholder="Number">
+							</div>
+
+							<div class="form-group">
+								<label for="item-distance">Distance</label>
+								<input type="text" class="form-control" id="item-distance" placeholder="Number">
+							</div>
+
+							<div class="form-group">
+								<label for="item-stroke">Stroke</label>
+								<select class="form-control" id="item-stroke">
+									<option disabled selected value> -- select an option -- </option>
+									<option>Free</option>
+									<option>IM</option>
+									<option>Breast</option>
+									<option>Back</option>		    
+									<option>Butterfly</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="item-style">Style</label>
+								<select class="form-control" id="item-style">
+									<option disabled selected value> -- select an option -- </option>
+									<option>Swim</option>
+									<option>Pull</option>
+									<option>Kick</option>
+									<option>Drill</option>		    
+									<option>Variable</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="item-pace">Pace</label>
+								<select class="form-control" id="item-pace">
+									<option disabled selected value> -- select an option -- </option>									
+									<option>Fast</option>
+									<option>Strong</option>
+									<option>Moderate</option>
+									<option>Easy</option>		    
+									<option>Build</option>
+									<option>Ascend</option>
+									<option>Descend</option>
+									<option>Variable</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<button type="submit" class="btn btn-info pull-right" id="add-item">Add Item</button>
+				</div>
+				<div class="col-sm-6">					
+					<div class="row">					
+						<div class="col-sm-12">
+							<h4>Current Set</h4>							
+							<div class="panel panel-default">
+							  <div class="panel-heading"><span class="label label-success">{{selectType}}</span></div>
+							  <div class="panel-body">
+							  	<row>
+							  		<div class="col-sm-6">
+							    		<p><span class="label label-danger">{{ cyclesInput }}{{#if cyclesInput }} X {{/if}}</span></p>
+							    		{{#if itemDistance}}<p><span class="label label-info">{{itemDistance}} x {{itemReps}} {{itemStroke}} {{itemStyle}} {{itemPace}}</span></p>{{/if}}
+							    		{{#each currentItems}}
+							    			<p><span class="label label-default">{{this.Distance}} x {{this.Reps}} {{this.Stroke}} {{this.Style}} {{this.Pace}}</span></p>
+							    		{{/each}}
+							    	</div>
+							    	<div class="col-sm-6">
+							    		<div class="row">
+							    			<div class="col-sm-12">
+							    				{{#if cycleDetailsPopulated}}
+							    				<p><p><span class="label label-warning">Cycle Details</span></p></p>
+							    				<p>{{ cycleDetails}}</p>
+							    				{{/if}}
+							    			</div>
+							    		</div>							    		
+							    		<div class="row">
+							    			<div class="col-sm-12">
+							    				{{#if specialInstructions}}
+							    				<p><span class="label label-primary">Special Instructions</span></p>
+							    				<p>{{specialInstructions}}</p>
+							    				{{/if}}
+							    			</div>
+							    		</div>
+							    		<div class="row">
+											<div class="col-sm-12">												
+												<button type="button" class="btn btn-default pull-right" id="save-current-set">Save Current Set</button>													
+											</div>
+										</div>
+							    	</div>
+								</row>
+							  </div>
+							</div>								
+						</div>												
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<h3>Created Sets</h3>
+					{{#each createdSets}}
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="panel panel-default">
+							  		<div class="panel-heading">
+							  			<p>{{ Type }}<button class="btn btn-xs pull-right remove-set-button" value="{{ identifier }}">X</button></p>						  	
+							  		</div>
+							  		<div class="panel-body">
+							  			<div class="row">							  		
+								  			<div class="col-sm-6">
+								    			<p><u>{{ Cycles }} x</u></p>
+								    			{{#each items }}
+								    				<p> {{ Distance }} x {{ Reps }} {{ Stroke }} {{ Style }} {{ Pace }}</p>
+								    			{{/each}}
+								    		</div>
+								    		<div class="col-sm-6">
+							    				<div class="row">
+							    					<div class="col-sm-12">
+							    						<p><u>Cycle Details</u></p>
+							    						<p>{{ CycleDetails }}</p>
+							    					</div>
+							    				</div>							    		
+							    				<div class="row">
+							    					<div class="col-sm-12">
+							    						<p><u>Special Instructions</u></p>
+							    						<p>{{ SpecialInstructions }}</p>
+							    					</div>
+							    				</div>
+											</div>														
+							    		</div>
+							    	</div>
+							    </div>
+							</div>
+						</div>
+					{{/each}}
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<h4>Workout Meta-Data (select all that apply)</h4>
+					<div class="form-group">						
+						<div class="checkbox-inline">
+						  <label>
+						    <input type="checkbox" class="meta-box" value="Long_Distance">
+						    Long Distance
+						  </label>
+						</div>
+						<div class="checkbox-inline">
+						  <label>
+						    <input type="checkbox" class="meta-box" value="Mid_distance">
+						    Mid-Distance
+						  </label>
+						</div>
+						<div class="checkbox-inline">
+						  <label>
+						    <input type="checkbox" class="meta-box" value="Sprint">
+						    Sprint
+						  </label>
+						</div>
+					</div>
+					<div class="form-group">						
+						<div class="checkbox-inline">
+						  <label>
+						    <input type="checkbox" class="meta-box" value="Free">
+						    Free
+						  </label>
+						</div>
+						<div class="checkbox-inline">
+						  <label>
+						    <input type="checkbox" class="meta-box" value="IM">
+						    IM
+						  </label>
+						</div>
+						<div class="checkbox-inline">
+						  <label>
+						    <input type="checkbox" class="meta-box" value="Stroke">
+						    Stroke
+						  </label>
+						</div>
+					</div>
+					<div class="form-group">								  
+						<textarea class="form-control" id="workout-instructions" placeholder="Instructions(Optional)" rows="3"></textarea>				  
+					</div>		
+				</div>
+			</div>					
+		<div class="row">
+			<div class="col-sm-12">												
+				<button type="submit" class="btn btn-default pull-right" id="save-workout-btn">Save Workout</button>													
+			</div>
+		</div>					
+</template>

@@ -1,0 +1,24 @@
+/* CSS declarations go here */
+.col-sm-6 p span.label, div.panel-heading span.label {
+	
+	font-size: 14px;
+}
+
+.fa-anchor{
+	color: #1abc9c;
+}
+
+.page-title-container{
+
+	background-image: url(/swimmer.jpg);
+	background-position: 66% -135%;
+}
+
+
+.alert {
+
+	position: fixed !important;
+	z-index: 10;
+	width: 50% !important;
+
+}

@@ -1,0 +1,1 @@
+SwimWorkout = new Mongo.Collection('swimworkout');

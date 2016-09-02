@@ -1,0 +1,14 @@
+{
+  "name": "Practice",
+  "private": true,
+  "scripts": {
+    "start": "meteor run"
+  },
+  "dependencies": {
+    "bcrypt": "^0.8.7",
+    "bootstrap": "^3.3.7",
+    "meteor-node-stubs": "~0.2.0",
+    "react": "^15.3.1",
+    "react-dom": "^15.3.1"
+  }
+}

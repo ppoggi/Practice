@@ -1,0 +1,20 @@
+<template name="mainLayout">
+  <head>    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  </head>
+  {{> navbar}}
+  <div class="container-fluid">
+    
+    <div class="container">    
+
+
+    {{#if user}}
+    
+      {{> Template.dynamic template=content}}      
+    {{else}}
+
+      {{> marketing}}
+    {{/if}}     
+  </div>
+  </div> 
+</template>
